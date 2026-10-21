@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Estudio de Tatuajes Profesional - Blackwork, Fine Line, Realismo y Tradicional. ¡Agenda tu cita por WhatsApp!">
+    <title>INK STUDIO | Professional Tattoo & Body Art</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* =========================================
+           VARIABLES Y RESET (TEMA OSCURO - ESTILO TATTOO STUDIO)
+           ========================================= */
+        :root {
+            --color-bg: #0B0B0B;
+            --color-surface: #141414;
+            --color-surface-light: #1E1E1E;
+            --color-accent: #E50914; /* Rojo vibrante / acento estudio */
+            --color-text: #EAEAEA;
+            --color-text-muted: #888888;
+            --color-border: #262626;
+            --header-bg: rgba(11, 11, 11, 0.95);
+            
+            --font-heading: 'Cinzel', serif;
+            --font-body: 'Poppins', sans-serif;
+            --transition: all 0.3s ease;
+        }
+
+        /* TEMA CLARO */
+        body.light-theme {
+            --color-bg: #F4F4F4;
+            --color-surface: #FFFFFF;
+            --color-surface-light: #EAEAEA;
+            --color-accent: #C8102E;
+            --color-text: #1A1A1A;
+            --color-text-muted: #666666;
+            --color-border: #DDDDDD;
+            --header-bg: rgba(244, 244, 244, 0.95);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-body); color: var(--color-text); background-color: var(--color-bg); overflow-x: hidden; transition: background-color 0.3s ease, color 0.3s ease; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        h1, h2, h3, h4 { font-family: var(--font-heading); color: var(--color-text); letter-spacing: 1px; }
+        body.light-theme h1, body.light-theme h2, body.light-theme h3, body.light-theme h4 { color: #111; }
+
+        /* =========================================
+           TOP ANNOUNCEMENT BAR
+           ========================================= */
+        .announcement-bar {
+            background-color: var(--color-accent);
+            color: #fff;
+            text-align: center;
+            padding: 8px 5%;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1001;
+        }
+
+        /* =========================================
+           HEADER & NAVEGACIÓN
+           ========================================= */
+        header {
+            position: fixed; top: 31px; left: 0; width: 100%;
+            padding: 18px 5%; display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; transition: var(--transition);
+            background-color: var(--header-bg);
+            border-bottom: 1px solid var(--color-border);
+            backdrop-filter: blur(10px);
+        }
+        .logo { font-family: var(--font-heading); font-size: 1.6rem; font-weight: 800; color: var(--color-text); display: flex; align-items: center; gap: 8px; letter-spacing: 2px; }
+        .logo span { color: var(--color-accent); }
+        
+        nav ul { display: flex; gap: 25px; }
+        nav ul li a { color: var(--color-text); font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1.5px; transition: var(--transition); }
+        nav ul li a:hover { color: var(--color-accent); }
+        
+        .header-actions { display: flex; align-items: center; gap: 15px; }
+        .theme-toggle-btn { background: none; border: none; color: var(--color-text); font-size: 1.1rem; cursor: pointer; transition: var(--transition); display: flex; align-items: center; }
+        .theme-toggle-btn:hover { color: var(--color-accent); }
+
+        .menu-toggle { display: none; font-size: 1.4rem; color: var(--color-text); cursor: pointer; transition: var(--transition); background: none; border: none; }
+        .menu-toggle:hover { color: var(--color-accent); }
+
+        .btn-header-cta {
+            background-color: var(--color-accent); color: #fff; padding: 10px 22px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: var(--transition);
+        }
+        .btn-header-cta:hover { opacity: 0.9; }
+
+        /* =========================================
+           HERO SECTION
+           ========================================= */
+        .hero { 
+            display: grid; grid-template-columns: 1fr 1fr; min-height: calc(100vh - 110px); 
+            margin-top: 110px; align-items: center; padding: 5% 8%; background-color: var(--color-bg); gap: 50px;
+        }
+        
+        .hero-frame-wrapper {
+            position: relative;
+            border: 3px solid var(--color-accent);
+            padding: 15px;
+            background: var(--color-surface);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+        .hero-frame-img {
+            width: 100%; height: 420px; object-fit: cover; filter: grayscale(30%); display: block;
+        }
+        .hero-stamp {
+            position: absolute; bottom: -15px; right: 20px; background: var(--color-accent); color: #fff; padding: 8px 18px; font-family: var(--font-heading); font-size: 0.85rem; font-weight: 800; transform: rotate(-3deg); box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .hero-content h2 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 3px; color: var(--color-accent); margin-bottom: 15px; font-weight: 600; }
+        .hero-content h1 { font-size: 3rem; line-height: 1.15; margin-bottom: 25px; }
+        .hero-content p { font-size: 0.95rem; line-height: 1.7; color: var(--color-text-muted); margin-bottom: 35px; }
+        
+        .hero-buttons { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+        .btn-primary-red {
+            background-color: var(--color-accent); color: #fff; padding: 14px 30px; border-radius: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px;
+            transition: var(--transition); border: none; cursor: pointer; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 10px;
+        }
+        .btn-primary-red:hover { opacity: 0.9; transform: translateY(-2px); }
+        .btn-secondary-outline {
+            background: transparent; color: var(--color-text); border: 1px solid var(--color-border); padding: 14px 25px; border-radius: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; transition: var(--transition); font-size: 0.85rem;
+        }
+        .btn-secondary-outline:hover { border-color: var(--color-accent); color: var(--color-accent); }
+
+        /* =========================================
+           INFO CARDS / PILARES
+           ========================================= */
+        .info-cards { display: grid; grid-template-columns: repeat(3, 1fr); background-color: var(--color-surface); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
+        .info-card { padding: 45px 30px; text-align: center; border-right: 1px solid var(--color-border); transition: var(--transition); }
+        .info-card:last-child { border-right: none; }
+        .info-card:hover { background-color: var(--color-surface-light); }
+        .info-card i { font-size: 2rem; color: var(--color-accent); margin-bottom: 18px; }
+        .info-card h3 { font-size: 1.2rem; margin-bottom: 12px; font-weight: 600; }
+        .info-card p { font-size: 0.9rem; color: var(--color-text-muted); line-height: 1.6; }
+
+        /* =========================================
+           ESTILOS Y TÉCNICAS (CARTA)
+           ========================================= */
+        .menu-section { padding: 100px 8%; background: var(--color-bg); text-align: center; }
+        .section-header { margin-bottom: 50px; }
+        .section-header h2 { font-size: 2.8rem; margin-bottom: 10px; }
+        .section-header p { color: var(--color-accent); text-transform: uppercase; letter-spacing: 2px; font-size: 0.85rem; font-weight: 600; }
+        
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; text-align: left; }
+        .service-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 6px; overflow: hidden; transition: var(--transition); display: flex; flex-direction: column; justify-content: space-between; }
+        .service-card:hover { transform: translateY(-8px); border-color: var(--color-accent); box-shadow: 0 15px 30px rgba(0,0,0,0.4); }
+        .service-img-wrapper { overflow: hidden; height: 210px; }
+        .service-img { height: 100%; width: 100%; object-fit: cover; transition: transform 0.5s ease; filter: grayscale(20%); }
+        .service-card:hover .service-img { transform: scale(1.08); filter: grayscale(0%); }
+        .service-body { padding: 25px; }
+        .service-body h3 { font-family: var(--font-heading); font-size: 1.15rem; font-weight: 600; margin-bottom: 10px; }
+        .service-body p { font-size: 0.85rem; color: var(--color-text-muted); line-height: 1.6; margin-bottom: 20px; }
+        .service-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--color-border); padding-top: 15px; margin-top: 15px; }
+        .service-price { font-family: var(--font-heading); font-size: 1.1rem; font-weight: 800; color: var(--color-accent); }
+        
+        .btn-wsp-small { background: #25D366; color: #fff; padding: 8px 16px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; transition: var(--transition); }
+        .btn-wsp-small:hover { opacity: 0.9; transform: scale(1.05); }
+
+        /* =========================================
+           ARTISTAS RESIDENTES
+           ========================================= */
+        .team-section { padding: 100px 8%; background: var(--color-surface); border-top: 1px solid var(--color-border); text-align: center; }
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; text-align: left; }
+        .team-card { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 6px; overflow: hidden; transition: var(--transition); }
+        .team-card img { width: 100%; height: 320px; object-fit: cover; filter: grayscale(30%); }
+        .team-info { padding: 25px; }
+        .team-info h3 { font-family: var(--font-heading); font-size: 1.25rem; margin-bottom: 5px; }
+        .team-info span { color: var(--color-accent); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; display: block; margin-bottom: 10px; letter-spacing: 1px; }
+        .team-info p { color: var(--color-text-muted); font-size: 0.85rem; line-height: 1.6; }
+
+        /* =========================================
+           GALERÍA DE TRABAJOS
+           ========================================= */
+        .gallery { padding: 100px 5%; background: var(--color-bg); }
+        .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; max-width: 1200px; margin: 0 auto; }
+        .gallery-item { position: relative; overflow: hidden; border-radius: 6px; height: 280px; cursor: pointer; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); filter: grayscale(30%); }
+        .gallery-item:hover img { transform: scale(1.08); filter: grayscale(0%); }
+
+        /* =========================================
+           PREGUNTAS FRECUENTES (FAQ) & COTIZADOR WSP
+           ========================================= */
+        .faq-section { padding: 100px 10%; background: var(--color-surface); border-top: 1px solid var(--color-border); display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+        .faq-left h2 { font-size: 2.8rem; margin-bottom: 20px; }
+        .faq-left p { color: var(--color-text-muted); line-height: 1.8; margin-bottom: 30px; font-size: 0.95rem; }
+        
+        .faq-accordion { display: flex; flex-direction: column; gap: 15px; }
+        .faq-item { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 6px; overflow: hidden; transition: var(--transition); }
+        .faq-question { padding: 18px 20px; width: 100%; text-align: left; background: none; border: none; font-family: var(--font-body); font-size: 0.95rem; font-weight: 600; color: var(--color-text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .faq-question i { color: var(--color-accent); transition: transform 0.3s ease; }
+        .faq-answer { max-height: 0; overflow: hidden; padding: 0 20px; color: var(--color-text-muted); font-size: 0.85rem; line-height: 1.6; transition: max-height 0.3s ease, padding 0.3s ease; }
+        .faq-item.active .faq-answer { max-height: 180px; padding: 0 20px 20px 20px; }
+        .faq-item.active .faq-question i { transform: rotate(180deg); }
+
+        .consultation-box { background: var(--color-bg); padding: 40px; border-radius: 6px; border: 1px solid var(--color-border); box-shadow: 0 15px 35px rgba(0,0,0,0.4); }
+        .consultation-box h3 { font-size: 1.8rem; margin-bottom: 15px; }
+        .consultation-box p { color: var(--color-text-muted); font-size: 0.85rem; margin-bottom: 25px; line-height: 1.6; }
+        
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; font-size: 0.8rem; color: var(--color-text-muted); margin-bottom: 6px; font-weight: 500; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%; padding: 14px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 4px; font-family: var(--font-body); outline: none; color: var(--color-text); transition: var(--transition); font-size: 0.9rem;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--color-accent); }
+        .form-group textarea { resize: vertical; min-height: 100px; }
+        
+        .btn-wsp-submit {
+            width: 100%; background: #25D366; color: #fff; padding: 15px; border: none; border-radius: 4px; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 10px; text-transform: uppercase; letter-spacing: 1px;
+        }
+        .btn-wsp-submit:hover { opacity: 0.9; transform: translateY(-2px); }
+
+        /* =========================================
+           BOTÓN FLOTANTE DE WHATSAPP
+           ========================================= */
+        .whatsapp-float {
+            position: fixed; bottom: 30px; right: 30px; background-color: #25D366; color: #FFF; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; box-shadow: 0 5px 20px rgba(0,0,0,0.5); z-index: 999; transition: var(--transition); animation: pulseWsp 2s infinite;
+        }
+        .whatsapp-float:hover { transform: scale(1.1); color: #fff; }
+        @keyframes pulseWsp {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        /* =========================================
+           FOOTER
+           ========================================= */
+        footer { background-color: var(--color-bg); color: var(--color-text); padding: 60px 10% 25px; border-top: 1px solid var(--color-border); text-align: center; }
+        .footer-content { max-width: 600px; margin: 0 auto; }
+        .footer-logo { font-family: var(--font-heading); font-size: 2rem; font-weight: 800; margin-bottom: 15px; letter-spacing: 2px; }
+        .footer-logo span { color: var(--color-accent); }
+        .footer-content p { color: var(--color-text-muted); font-size: 0.85rem; line-height: 1.8; margin-bottom: 25px; }
+        .social-icons { display: flex; justify-content: center; gap: 20px; font-size: 1.3rem; margin-bottom: 30px; }
+        .social-icons a { color: var(--color-text); transition: var(--transition); }
+        .social-icons a:hover { color: var(--color-accent); }
+        .footer-bottom { border-top: 1px solid var(--color-border); padding-top: 20px; color: var(--color-text-muted); font-size: 0.8rem; }
+
+        /* =========================================
+           RESPONSIVE (MEDIA QUERIES)
+           ========================================= */
+        @media (max-width: 992px) {
+            .hero { grid-template-columns: 1fr; padding-top: 40px; margin-top: 110px; text-align: center; }
+            .hero-content { display: flex; flex-direction: column; align-items: center; }
+            .hero-buttons { justify-content: center; }
+            .hero-frame-wrapper { max-width: 500px; margin: 0 auto; }
+            
+            .info-cards { grid-template-columns: 1fr; }
+            .info-card { border-right: none; border-bottom: 1px solid var(--color-border); }
+            
+            .gallery-grid { grid-template-columns: 1fr 1fr; }
+            .faq-section { grid-template-columns: 1fr; gap: 40px; }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            nav {
+                position: absolute; top: 100%; left: 0; width: 100%; background-color: var(--color-surface); border-bottom: 1px solid var(--color-border); box-shadow: 0 10px 30px rgba(0,0,0,0.5); transform: translateY(-150%); opacity: 0; transition: transform 0.4s ease, opacity 0.4s ease; z-index: -1; pointer-events: none;
+            }
+            nav.active { transform: translateY(0); opacity: 1; pointer-events: auto; }
+            nav ul { flex-direction: column; gap: 0; padding: 10px 0; }
+            nav ul li { width: 100%; text-align: center; }
+            nav ul li a { display: block; padding: 15px 0; border-bottom: 1px solid var(--color-border); }
+            nav ul li:last-child a { border-bottom: none; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .btn-header-cta { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ANNOUNCEMENT BAR -->
+    <div class="announcement-bar">
+        🔥 AGENDA ABIERTA OCTUBRE & NOVIEMBRE — CONSULTAS DIRECTAS POR WHATSAPP 🔥
+    </div>
+
+    <!-- BOTÓN FLOTANTE DE WHATSAPP -->
+    <a href="https://wa.me/5491100000000?text=¡Hola!%20Quisiera%20cotizar%20un%20tatuaje%20y%20agendar%20cita" 
+       class="whatsapp-float" target="_blank" aria-label="Consulta por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- HEADER -->
+    <header>
+        <a href="#" class="logo">INK<span>STUDIO.</span></a>
+        
+        <nav id="nav-menu">
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#estilos">Estilos</a></li>
+                <li><a href="#artistas">Artistas</a></li>
+                <li><a href="#galeria">Trabajos</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#contacto">Cotizar</a></li>
+            </ul>
+        </nav>
+        
+        <div class="header-actions">
+            <button class="theme-toggle-btn" id="theme-btn" aria-label="Cambiar tema claro u oscuro">
+                <i class="fas fa-moon" id="theme-icon"></i>
+            </button>
+            <a href="#contacto" class="btn-header-cta">Book Now</a>
+            <button class="menu-toggle" id="mobile-menu-btn" aria-label="Abrir menú">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- 1. HERO SECTION -->
+    <section class="hero" id="inicio">
+        <div class="hero-frame-wrapper">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-CWWmN8MtSNiBmwRBRGnl6NTED-mibOmHfcKTeTYRSy_PfpJ51hWb2nS4&s=10" loading="lazy">
+            <div class="hero-stamp">INK STUDIO</div>
+        </div>
+        <div class="hero-content">
+            <h2>ESTILO, PRECISIÓN & ARTE EN LA PIEL</h2>
+            <h1>Professional Tattoo Studio</h1>
+            <p>Custom art. Fine line, blackwork, realism and old school — by a team that makes your skin talk. Contact us with your idea like a masterwork.</p>
+            <div class="hero-buttons">
+                <a href="#contacto" class="btn-primary-red">
+                    <i class="fab fa-whatsapp"></i> Book Your Session
+                </a>
+                <a href="#galeria" class="btn-secondary-outline">See The Work</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. INFO CARDS -->
+    <section class="info-cards">
+        <div class="info-card">
+            <i class="fas fa-pen-nib"></i>
+            <h3>Diseños Exclusivos</h3>
+            <p>Cada pieza se diseña desde cero adaptándose a la anatomía de tu cuerpo y a tu concepto.</p>
+        </div>
+        <div class="info-card">
+            <i class="fas fa-shield-virus"></i>
+            <h3>Higiene y Esterilidad</h3>
+            <p>Ambiente totalmente esterilizado, agujas descartables de un solo uso y tintas veganas.</p>
+        </div>
+        <div class="info-card">
+            <i class="fas fa-clock"></i>
+            <h3>Seguimiento Post-Tattoo</h3>
+            <p>Asesoramiento y soporte completo durante todo el proceso de curación de tu pieza.</p>
+        </div>
+    </section>
+
+    <!-- 3. ESTILOS Y TÉCNICAS (CARTA) -->
+    <section class="menu-section" id="estilos">
+        <div class="section-header">
+            <h2>Nuestros Estilos</h2>
+            <p>Especialidades del estudio</p>
+        </div>
+
+        <div class="menu-grid">
+            <!-- Estilo 1 -->
+            <div class="service-card">
+                <div class="service-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Fine Line" class="service-img" loading="lazy">
+                </div>
+                <div class="service-body">
+                    <h3>Fine Line / Línea Fina</h3>
+                    <p>Trazos delicados, minimalistas y de gran precisión. Ideal para piezas sutiles.</p>
+                    <div class="service-footer">
+                        <span class="service-price">Desde $15.000</span>
+                        <a href="https://wa.me/5491100000000?text=Hola!%20Quisiera%20cotizar%20un%20tatuaje%20en%20Fine%20Line" target="_blank" class="btn-wsp-small">
+                            <i class="fab fa-whatsapp"></i> Cotizar
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Estilo 2 -->
+            <div class="service-card">
+                <div class="service-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1590247813693-5541d1c609fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Blackwork" class="service-img" loading="lazy">
+                </div>
+                <div class="service-body">
+                    <h3>Blackwork & Sombra</h3>
+                    <p>Contrastes profundos, sombras intensas, figuras geométricas y diseño oscuro.</p>
+                    <div class="service-footer">
+                        <span class="service-price">Desde $20.000</span>
+                        <a href="https://wa.me/5491100000000?text=Hola!%20Quisiera%20cotizar%20un%20tatuaje%20Blackwork" target="_blank" class="btn-wsp-small">
+                            <i class="fab fa-whatsapp"></i> Cotizar
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Estilo 3 -->
+            <div class="service-card">
+                <div class="service-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1568515041001-f2ba97cad398?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Realismo" class="service-img" loading="lazy">
+                </div>
+                <div class="service-body">
+                    <h3>Realismo (B&N)</h3>
+                    <p>Retratos, texturas y piezas complejas con alto nivel de detalle fotográfico.</p>
+                    <div class="service-footer">
+                        <span class="service-price">Consultar seña</span>
+                        <a href="https://wa.me/5491100000000?text=Hola!%20Quisiera%20cotizar%20una%20pieza%20de%20Realismo" target="_blank" class="btn-wsp-small">
+                            <i class="fab fa-whatsapp"></i> Cotizar
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Estilo 4 -->
+            <div class="service-card">
+                <div class="service-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1598371839606-9185d8fc3937?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Full Sleeves" class="service-img" loading="lazy">
+                </div>
+                <div class="service-body">
+                    <h3>Proyectos / Mangas</h3>
+                    <p>Planificación integral para mangas completas o espaldas con continuidad estética.</p>
+                    <div class="service-footer">
+                        <span class="service-price">Sesión completa</span>
+                        <a href="https://wa.me/5491100000000?text=Hola!%20Quisiera%20hablar%20de%20un%20proyecto%20grande" target="_blank" class="btn-wsp-small">
+                            <i class="fab fa-whatsapp"></i> Consultar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. ARTISTAS RESIDENTES -->
+    <section class="team-section" id="artistas">
+        <div class="section-header" style="margin-bottom: 50px;">
+            <h2>Nuestros Artistas</h2>
+            <p>Conoce al equipo del estudio</p>
+        </div>
+        <div class="team-grid">
+            <div class="team-card">
+                <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Axel Vane" loading="lazy">
+                <div class="team-info">
+                    <h3>Axel Vane</h3>
+                    <span>Especialista en Realismo</span>
+                    <p>Más de 8 años de experiencia transformando retratos y texturas complejas en obras de arte.</p>
+                </div>
+            </div>
+            <div class="team-card">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Mía Line" loading="lazy">
+                <div class="team-info">
+                    <h3>Mía Line</h3>
+                    <span>Especialista en Fine Line</span>
+                    <p>Apasionada por el diseño minimalista, la botánica y las líneas ultra precisas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. GALERÍA -->
+    <section class="gallery" id="galeria">
+        <div class="section-header" style="text-align: center; margin-bottom: 40px;">
+            <h2>Trabajos Recientes</h2>
+            <p>Piezas curadas del estudio</p>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Tatuaje fine line" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1590247813693-5541d1c609fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Tatuaje blackwork" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1568515041001-f2ba97cad398?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Tatuaje realismo" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. FAQ Y COTIZADOR WHATSAPP -->
+    <section class="faq-section" id="faq">
+        <div class="faq-left">
+            <h2>Preguntas Frecuentes</h2>
+            <p>Todo lo que necesitas saber antes de pasar por las agujas del estudio.</p>
+            
+            <div class="faq-accordion">
+                <div class="faq-item">
+                    <button class="faq-question">¿Cómo se calcula el presupuesto? <i class="fas fa-chevron-down"></i></button>
+                    <div class="faq-answer">
+                        <p>El valor depende directamente del tamaño en centímetros, la zona del cuerpo y el nivel de complejidad del diseño. Envíanos tu referencia por WhatsApp.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">¿Cómo se reserva el turno? <i class="fas fa-chevron-down"></i></button>
+                    <div class="faq-answer">
+                        <p>Los turnos se confirman únicamente mediante el abono de una seña previa, la cual se descuenta del valor total de la sesión.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">¿Duele mucho? <i class="fas fa-chevron-down"></i></button>
+                    <div class="faq-answer">
+                        <p>La sensación varía según la zona del cuerpo y la tolerancia personal, siendo totalmente llevadera con una buena hidratación previa.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="consultation-box" id="contacto">
+            <h3>Book Your Session</h3>
+            <p>Completa los datos para enviar tu idea directamente a nuestro WhatsApp y coordinar tu turno.</p>
+            
+            <form id="wsp-form">
+                <div class="form-group">
+                    <label for="name">Tu Nombre</label>
+                    <input type="text" id="name" placeholder="Ej. Franco" required>
+                </div>
+                <div class="form-group">
+                    <label for="style-select">Estilo deseado</label>
+                    <select id="style-select">
+                        <option value="Fine Line">Fine Line (Línea Fina)</option>
+                        <option value="Blackwork">Blackwork & Sombra</option>
+                        <option value="Realismo">Realismo</option>
+                        <option value="Proyecto Grande / Manga">Proyecto Grande / Manga</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Describe tu idea y zona del cuerpo</label>
+                    <textarea id="message" placeholder="Ej. Un diseño geométrico en el antebrazo, tamaño aprox 15cm..." required></textarea>
+                </div>
+                <button type="submit" class="btn-wsp-submit">
+                    <i class="fab fa-whatsapp fa-lg"></i> Enviar consulta por WhatsApp
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">INK<span>STUDIO.</span></div>
+            <p>Estudio profesional de tatuajes. Arte, diseño y seguridad en cada sesión.</p>
+            <div class="social-icons">
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                <a href="https://wa.me/5491100000000" aria-label="WhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="year"></span> Ink Studio. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script>
+        // Menú hamburguesa responsive
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const navMenu = document.getElementById('nav-menu');
+        const navLinks = navMenu.querySelectorAll('a');
+
+        mobileBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            const icon = mobileBtn.querySelector('i');
+            if(navMenu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                mobileBtn.querySelector('i').classList.remove('fa-times');
+                mobileBtn.querySelector('i').classList.add('fa-bars');
+            });
+        });
+
+        // Cambio de Tema Claro / Oscuro
+        const themeBtn = document.getElementById('theme-btn');
+        const themeIcon = document.getElementById('theme-icon');
+
+        themeBtn.addEventListener('click', () => {
+            document.body.classList.toggle('light-theme');
+            if (document.body.classList.contains('light-theme')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        });
+
+        // Acordeón de FAQ
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const questionBtn = item.querySelector('.faq-question');
+            questionBtn.addEventListener('click', () => {
+                faqItems.forEach(other => {
+                    if (other !== item) other.classList.remove('active');
+                });
+                item.classList.toggle('active');
+            });
+        });
+
+        // Generador automático de mensaje para WhatsApp desde el formulario de cotización
+        document.getElementById('wsp-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            const style = document.getElementById('style-select').value;
+            const message = document.getElementById('message').value.trim();
+
+            let wspText = `¡Hola! Mi nombre es *${name}*. Quisiera cotizar un tatuaje estilo *${style}*.\n\nIdea y zona: ${message}`;
+
+            const encodedText = encodeURIComponent(wspText);
+            const phoneNumber = "5491100000000"; // Reemplaza con tu número de WhatsApp real
+            window.open(`https://wa.me/${phoneNumber}?text=${encodedText}`, '_blank');
+        });
+
+        // Año dinámico en el footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
